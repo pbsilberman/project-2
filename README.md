@@ -19,7 +19,7 @@ https://feeds.divvybikes.com/stations/stations.json
 
 ![alt text](image/route.jpg)
 
-![alt text](image/route2.png)
+![alt text](image/routes2.png)
 
 
 ## A link to the primary GitHub repository
