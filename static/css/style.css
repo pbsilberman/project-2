@@ -1,0 +1,23 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light{
+    color:#fff;
+    background-color:#3db7e4 !important;
+}
+
+.navbar-light .navbar-brand{
+
+	color: #fff;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+.navbar-brand h1.title-font{
+    font-weight:200;
+    font-size:35px;
+
+	}
+
+.divvy-logo img{
+
+    margin-top:50px;
+}
