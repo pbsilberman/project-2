@@ -1,84 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>
-Divvy Data Analysis
-</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-<link rel="stylesheet" href="../static/css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+  <meta charset="UTF-8">
+  <title>
+  Divvy Data Analysis
+  </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:#3db7e4;">
-<center><a class="navbar-brand" href="#"><h1 class="title-font">Divvy Data Analysis</h1></a></center>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-    	
-<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          THE DATA
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="visualization-page1.html">Visualization 1</a>
-          <a class="dropdown-item" href="visualization-page2.html">Visualization 2</a>
-          <a class="dropdown-item" href="visualization-page3.html">Visualization 3</a>
-          <a class="dropdown-item" href="visualization-page4.html">Visualization 4</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="data-page.html">ABOUT</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:#3db7e4;">
+  <center><a class="navbar-brand" href="#"><h1 class="title-font">Divvy Data Analysis</h1></a></center>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        
+  <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            THE DATA
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="visualization-page1.html">Visualization 1</a>
+            <a class="dropdown-item" href="visualization-page2.html">Visualization 2</a>
+            <a class="dropdown-item" href="visualization-page3.html">Visualization 3</a>
+            <a class="dropdown-item" href="visualization-page4.html">Visualization 4</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="data-page.html">ABOUT</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
 
 
-<div class="container">
+  <div class="container">
 
-	
-  <div class="row">
-      
-    <div class="offset-md-1 col-md-10 content-pg-1">
-<br/>
-<br/>
-<br/>
-        <h2>Visualization 2</h2>  
-        <hr>
-        <div class="row">
-        	
-           <div class="col-md-8 caption">
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
-           </div>
-        <div class="col-md-4"><img src="divybikes.png" height="auto" width="100%"/></div>
-    </div>  
-    </div> 
-        <br>
-
-   
     
+    <div class="row">
+        
+      <div class="offset-md-1 col-md-10 content-pg-1">
+  <br/>
+  <br/>
+  <br/>
+          <h2>Visualization 2</h2>  
+          <hr>
+          <div class="row">
+            
+            <div class="col-xs-12  col-md-9 col-md-offset-0">
+              <div class="chart">
+                <iframe width="960" height="500" src="d3.html" style="border:none;"></iframe>
+              </div>
+            </div>
+
+
+
+            <div class="col-md-8 caption">
+  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney 
+            </div>
+
+
+
+            <div class="col-md-4" ><img src="/static/img/divvybikes.png" height="auto" width="100%"/></div>
+      </div>  
+      </div> 
+          <br>
+
+    
+      
+    </div>
+  <div class="row">
+      <div class="offset-md-4 col-md-4">
+        <img src="/static/img/divvylogo.png" align="left" height="auto" width="100%"/>
+      </div>
+
+    </div>  
+
+    <br>
+    <br>
+
+
   </div>
- <div class="row">
-		<div class="offset-md-4 col-md-4">
-			<img src="DivvyLogo_p_v2.png" align="left" height="auto" width="100%"/>
-		</div>
-
-	</div>  
-
-  <br>
-  <br>
-
-
-</div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
 </body>
 </html>
