@@ -37,7 +37,7 @@ def index():
 def trip():
     
     # Use Pandas to perform the sql query
-    query = "select * from trip"
+    query = "select * from trip where usertype = 'Subscriber' and birthyear between 1929 and 2016"
     trip=pd.read_sql_query(query,db.session.bind)
 
     # Return a list of the column names (sample names)
@@ -49,7 +49,6 @@ def station():
     # Use Pandas to perform the sql query
     query = "select * from station"
     station=pd.read_sql_query(query,db.session.bind)
-
     # Return a list of the column names (sample names)
     return jsonify(station.to_dict(orient="records"))
 
