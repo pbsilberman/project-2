@@ -17,7 +17,7 @@
 
 function onEachFeature(feature, layer) {
     layer.bindPopup("<h3>" + feature.properties.station +
-      "</h3><hr><p>" + "Total Docks" + feature.properties.totaldocks + "</p>");
+      "</h3><hr><p>Total Docks " + feature.properties.totaldocks + "</p>");
   }
 
    L.geoJSON(stations, {
