@@ -6,14 +6,14 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light{
 
 .navbar-light .navbar-brand{
 
-	color: #fff;
+	color: #fff !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: #fff;
+    color: #fff !important;
 }
 .navbar-brand h1.title-font{
-    font-weight: 800;
+    font-weight: 100;
     font-size: 34px;
 
 	}
@@ -100,4 +100,22 @@ background-color: #fff;
 }
 .card{
     border-radius: 0;
+}
+
+.dropdown-menu{
+    border-radius: 0px !important;
+}
+
+a,h2,h3,h4,h5,h6{
+
+    font-family: 'IBM Plex Sans Condensed', sans-serif;
+}
+
+h1.title-font{
+    font-family: 'IBM Plex Sans', monospace;
+
+}
+
+p{
+    font-family: 'IBM Plex Sans', sans-serif;
 }
