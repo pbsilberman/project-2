@@ -30,3 +30,33 @@ h6{
     font-size:12px;
 }
 
+.navbar-light .navbar-toggler {
+    background-color: #fff;
+}
+
+.navbar-fixed-top{
+
+    top: 0;
+z-index: 9999;
+width: 100%;
+position: fixed;
+
+}
+
+.side-left-nav{
+margin: 0px;
+min-height: 800px;
+position: fixed;
+z-index: 9998;
+
+}
+
+
+.card-footer:last-child {
+    height: 50px;
+}
+
+.nav-left-ol{
+    padding-left: 18px;
+    padding-top: 30px;
+}
