@@ -1,6 +1,7 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light{
-    color:#fff;
-    background-color:#3db7e4 !important;
+    color:#3db7e4;
+    background-color:#fff !important;
+    /*#3db7e4*/
 }
 
 .navbar-light .navbar-brand{
@@ -12,8 +13,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light{
     color: #fff;
 }
 .navbar-brand h1.title-font{
-    font-weight:200;
-    font-size:35px;
+    font-weight: 800;
+    font-size: 34px;
 
 	}
 
@@ -37,26 +38,66 @@ h6{
 .navbar-fixed-top{
 
     top: 0;
-z-index: 9999;
-width: 100%;
-position: fixed;
+    z-index: 9999;
+    width: 100%;
+    position: fixed;
 
 }
 
 .side-left-nav{
-margin: 0px;
-min-height: 800px;
-position: fixed;
-z-index: 9998;
+    margin: 0px;
+    min-height: 5000px;
+    position: fixed;
+    z-index: 9998;
+    /*top: 0;*/
+    padding-top: 25px;
 
 }
 
 
 .card-footer:last-child {
     height: 50px;
+    background-color:#fff;
 }
 
 .nav-left-ol{
     padding-left: 18px;
-    padding-top: 30px;
+    padding-top: 0px;
+}
+
+.nav-left-ol li{
+    padding-bottom: 30px;
+}
+
+ol.nav-left-ol li .fas{
+    font-size: 25px;
+    padding-right: 5px;
+
+}
+
+ol.nav-left-ol li a{
+    padding-bottom: 20px;
+    font-weight: bold;
+
+}
+
+.leaflet-popup-content-wrapper {
+    padding: 5px !important;
+    border-radius: 0px !important;
+}
+
+.leaflet-popup-content {
+    margin: 19px 19px !important;
+}
+
+.breadcrumb{
+background-color: #fff;
+border-radius: 0;
+border: 1px solid #e3e3e3;
+}
+.card-header{
+background-color: #fff;
+}
+.card{
+    border-radius: 0;
 }

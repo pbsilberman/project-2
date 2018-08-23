@@ -18,13 +18,13 @@ Divvy Data Analysis
 <body style="background:#fff;">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top" style="background-color:#333 !important;">
   <div class="container-fluid">
-<center><a class="navbar-brand" href="#"><h1 class="title-font"><i class="fas fa-bicycle"></i>&nbsp;Divvy Data Analysis</h1></a></center>
+<center><a class="navbar-brand" href="#"><h1 class="title-font"><i class="fas fa-bicycle"></i>&nbsp;Divvy Data</h1></a></center>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-    	
+      
 <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           THE DATA
@@ -40,8 +40,9 @@ Divvy Data Analysis
         <a class="nav-link" href="data-page.html">ABOUT</a>
       </li>
     </ul>
+    </div>
   </div>
-  </div>
+  
 </nav>
 
 
@@ -49,17 +50,17 @@ Divvy Data Analysis
 <div class="container-fluid" style="margin:0px;padding:0px; margin-top:75px;">
 
 	<div class="row" style="margin:0px;padding:0px;">
-    <div class="col-2 d-none d-lg-block side-left-nav" style="background-color:#222; margin:0px; min-height:800px;">
+    <div class="col-2 d-none d-lg-block side-left-nav" style="background-color:#222; margin:0px;">
       <ol class="nav-left-ol">
             <li class=""style="padding-top:20px;padding-bottom:20px;"><a href="#" style="color:#fff;padding-top:20px;padding-bottom:20px;"><i class="fas fa-tachometer-alt"></i>&nbsp;Dashboard</a></li>
-            <li class="" style="padding-bottom:20px;"><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-map-marked-alt"></i>&nbsp;visualization 1</a></li>
-            <li class="" style="padding-bottom:20px;"><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-chart-bar"></i>&nbsp;visualization 1</a></li>
-            <li class="" style="padding-bottom:20px;"><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-asterisk"></i>&nbsp;visualization 1</a></li>
-            <li class="" style="padding-bottom:20px;" ><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-bicycle"></i>&nbsp;visualization 1</a></li>
+            <li class="" style="padding-bottom:20px;"><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-map-marked-alt"></i>&nbsp;Map</a></li>
+            <li class="" style="padding-bottom:20px;"><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-chart-bar"></i>&nbsp;Data Charts</a></li>
+            <li class="" style="padding-bottom:20px;"><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-asterisk"></i>&nbsp;Flare</a></li>
+            <li class="" style="padding-bottom:20px;" ><a href="#" style="color:#fff;padding-bottom:20px;"><i class="fas fa-bicycle"></i>&nbsp;Distance V</a></li>
           </ol>
     </div>
     <div class="offset-lg-2 col-lg-10 " style="background-color:#fff;  height:100%;">
-           
+          
            <!-- Area Chart Example-->     
 
                 <ol class="breadcrumb" style="margin-top:15px;">
@@ -70,16 +71,41 @@ Divvy Data Analysis
           </ol>
 
           <!-- Area Chart Example-->
-          <div class="card mb-3">
-            <div class="card-header">
+        <div class="row">
+          <div class="col-lg-8 col-md-8">
+              <div class="card mb-3">
+                 <div class="card-header">
               <i class="fas fa-chart-area"></i>
-              Divvy Station Map</div>
-            <div class="card-body" id="map">
+              Divvy Station Map
+                 </div>
+                <div class="card-body" id="map">
               <!--<canvas id="map" width="100%" height="30"></canvas>-->
-            </div>
-            <div class="card-footer small text-muted" ></div>
+                </div>
+                      <div class="card-footer small text-muted" ></div>
+              </div>
           </div>
-          <!-- Area Chart Example-->
+          <div class="col-lg-4 col-md-4" style="height:100%;">
+              <div class="card mb-3" style="height:100%;">
+                 <div class="card-header">
+              <i class="fas fa-chart-area"></i>
+              About Divvy 
+                 </div>
+                <div class="card-body" id="" >
+                  <h4>Data from the DIVVY Wiki</h4>
+                  <div><strong>Owner: </strong>Chicago</div>
+<div><strong>Daily ridership: </strong><span>13,000 (Sep 2014)</span></div>
+<div><strong>Annual ridership:</strong> <span>3,200,000 (Feb 2016)</span></div>
+<div><strong>Number of stations: </strong><span>580</span></div>
+<div><strong>Began operation: </strong><span>June 28, 2013</span></div>
+<div><strong>Founded: </strong><span>2011</span></div>
+<div><strong>Number of vehicles: </strong><span>5,800</span></div>
+              <!--<canvas id="map" width="100%" height="30"></canvas>-->
+                </div>
+                      <div class="card-footer small text-muted" ></div>
+              </div>
+          </div>
+        </div>  
+          <!-- Area Chart Example -->
     </div>
   </div>
 
