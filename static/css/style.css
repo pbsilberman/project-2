@@ -110,6 +110,10 @@ a,h2,h3,h4,h5,h6{
 
     font-family: 'IBM Plex Sans Condensed', sans-serif;
 }
+a{
+
+    color:#3db7e4;
+}
 
 h1.title-font{
     font-family: 'IBM Plex Sans', monospace;
