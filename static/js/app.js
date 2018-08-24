@@ -12,80 +12,111 @@ id: "mapbox.streets-basic",
 accessToken: API_KEY
 }).addTo(myMap);
 
-trips_url = '/trips';
 
-d3.json(trips_url).then(function(data) {
-    // Once a response is received, send the data.features object to the createFeatures function
-    console.log(data);
+var circleGroup = L.featureGroup().addTo(myMap).on("click", groupClick);
+var marker, test;
 
-    createTrips(data)
-});
 
-stations_url = '/stationvolume';
-
-d3.json(stations_url).then(function(data) {
-    // Once a response is received, send the data.features object to the createFeatures function
+d3.json('/stationvolume').then(function(data) {
+    // Once a response is received, send the data.features object to the createStations function
     console.log(data);
 
     createStations(data)
 });
 
 function createStations(stationsData) {
-    function circleRadius(x) {
-        x = +x;
-        if (x > 300) {
-            return (x/30)
-        } else {
-            return 10
+    function chooseColor(d) {
+        if (d <= 100) {
+            return "#DCEDC8";
+        }
+        else if (d > 100 && d <= 500) {
+            return "#e894c1";
+        }
+        else if (d > 500 && d <= 1000) {
+            return "#F45DAD";
+        }
+        else if (d > 1000 && d <= 2000){
+            return "#DD308D";
+        }
+        else if (d > 2000 && d <= 3000){
+            return "#A54277";
+        }
+        else if (d > 3000) {
+            return "#871552";
+        }
+        else {
+        return "green";
         }
     }
 
     for(var i = 0; i < stationsData.length; i++) {
-        L.circle([stationsData[i].from_latitude, stationsData[i].from_longitude], {
-            fillOpacity: 0.5,
+
+        var circle = L.circle([stationsData[i].from_latitude, stationsData[i].from_longitude], {
+            fillOpacity: 0.75,
             color: "black",
             weight: 1,
-            fillColor: "pink",
-            radius: circleRadius(stationsData[i].trip_count)
-            }).bindPopup("<h3>" + stationsData[i].name + "</h3><br><h4>" + stationsData[i].trip_count + " trips</h4>")
-            .addTo(myMap);
-    }
+            fillColor: chooseColor(stationsData[i].trip_count),
+            radius: 50
+            })
+            //.bindPopup("<h3>" + stationsData[i].name + "</h3><h4>" + stationsData[i].trip_count + " trips</h4>")
+            .addTo(circleGroup);
+            
+        test = stationsData[i].from_station_id;    
+        circle.test = test;
+    };
+
+    var legend = L.control({position: 'bottomright'});
+
+    legend.onAdd = function (map) {
+
+        var div = L.DomUtil.create('div', 'info legend'),
+            trips = [0,100,500,1000,2000,3000],
+            labels = [];
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < trips.length; i++) {
+            div.innerHTML +=
+                '<i style="background:' + chooseColor(trips[i] + 1) + '"></i> ' +
+                trips[i] + (trips[i + 1] ? '&ndash;' + trips[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+
+    legend.addTo(myMap);
+
+};
+
+function groupClick(event) {
+    // console.log(event.layer.test)
+    lineGroup.clearLayers();
+    showTrips(event.layer.test)
 }
 
-function createTrips(tripsData) {
 
-    // Write a loop to run once for each station-to-station connection in the array.
+var lineGroup = L.featureGroup().addTo(myMap);
+
+function showTrips(stationID) {
+    d3.json(`/trips/${stationID}`).then(function(data) {
+        // Once a response is received, send the data object to the createTrips function
+        console.log(data);
+
+        createTrips(data)
+    });
+};
+
+function createTrips(tripsData) {
+    // Write a loop to run once for each station-to-station connection in the array and add them to a group.
     for(var i = 0; i < tripsData.length; i++) {
         var line = [
             [tripsData[i].from_latitude , tripsData[i].from_longitude],
             [tripsData[i].to_latitude , tripsData[i].to_longitude]
         ];
 
-        // L.polyline(line, {
-        //     color: "black",
-        //     weight: 1,
-        //     opacity: 0.5
-        // }).addTo(myMap);
+        L.polyline(line, {
+            color: "black",
+            weight: 1,
+            opacity: 0.5
+        }).addTo(lineGroup);
     }
-
-    // var legend = L.control({position: 'bottomright'});
-
-    // legend.onAdd = function (map) {
-
-    //     var div = L.DomUtil.create('div', 'info legend'),
-    //         magniutdes = [0,1,2,3,4,5],
-    //         labels = [];
-
-    //     // loop through our density intervals and generate a label with a colored square for each interval
-    //     for (var i = 0; i < magniutdes.length; i++) {
-    //         div.innerHTML +=
-    //             '<i style="background:' + chooseColor(magniutdes[i] + 1) + '"></i> ' +
-    //             magniutdes[i] + (magniutdes[i + 1] ? '&ndash;' + magniutdes[i + 1] + '<br>' : '+');
-    //     }
-
-    //     return div;
-    // };
-
-    // legend.addTo(myMap);
 }
-
