@@ -1,6 +1,14 @@
+body{
+    background:#fff;
+}
+
+.big-rows{
+    margin:0px;padding:0px;
+}
+
 nav.navbar.navbar-expand-lg.navbar-light.bg-light{
     color:#3db7e4;
-    background-color:#fff !important;
+    background-color:#333 !important;
     /*#3db7e4*/
 }
 
@@ -15,7 +23,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light{
 .navbar-brand h1.title-font{
     font-weight: 100;
     font-size: 34px;
-
+    margin-bottom: 0px;
 	}
 
 .divvy-logo img{
@@ -51,7 +59,7 @@ h6{
     z-index: 9998;
     /*top: 0;*/
     padding-top: 25px;
-
+    background-color:#222;    
 }
 
 
@@ -122,4 +130,42 @@ h1.title-font{
 
 p{
     font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.main-cont{
+    margin:0px;
+    padding:0px; 
+    margin-top:67px;
+
+}
+
+.main-chart{
+    background-color:#fff;  
+    height:100%;
+}
+
+.navbar-fixed-top{
+    background-color:#333 !important;
+}
+
+.breadcrumb{
+    margin-top:15px;
+}
+
+.top-li{
+    padding-top:20px;
+}
+
+.top-li a{
+    padding-top:20px;
+}
+
+.nav-left-ol li{
+    padding-bottom:20px;
+}
+
+.nav-left-ol li a{
+color:#fff;
+padding-bottom:20px;
+
 }
