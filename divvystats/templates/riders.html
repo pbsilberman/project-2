@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>
+Divvy Data Analysis
+</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans+Condensed:400,400i|IBM+Plex+Sans:100,100i,400,400i,700,700i|IBM+Plex+Serif:400,400i" rel="stylesheet"> 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+  <!-- Our CSS -->
+
+  <!-- D3 -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+
+<link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top" style="">
+  <div class="container-fluid">
+<center><a class="navbar-brand" href="#"><h1 class="title-font"><i class="fas fa-bicycle"></i>&nbsp;DIVVY DATA</h1></a></center>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto d-lg-none">
+      
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Visualizations
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Dashboard</a>
+          <a class="dropdown-item" href="#">Station Map</a>
+          <a class="dropdown-item" href="/riders">Rider Analysis</a>
+          <a class="dropdown-item" href="/flare">Flare</a>
+          <a class="dropdown-item" href="/connects">Connections</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="data-page.html">ABOUT</a>
+      </li>
+    </ul>
+    </div>
+  </div>
+  
+</nav>
+
+
+
+<div class="container-fluid main-cont" style="">
+
+	<div class="row big-rows" style="">
+    <div class="col-2 d-none d-lg-block side-left-nav" style="">
+      <ol class="nav-left-ol">
+            <li class="top-li"style=""><a href="#" style=""><i class="fas fa-tachometer-alt"></i>&nbsp;&nbsp;Dashboard</a></li>
+            <li class="" style=""><a href="/" style=""><i class="fas fa-map-marked-alt"></i>&nbsp;&nbsp;Map</a></li>
+            <li class="" style=""><a href="/riders" style=""><i class="fas fa-chart-bar"></i>&nbsp;&nbsp;&nbsp;Rider Analysis</a></li>
+            <li class="" style=""><a href="/flare" style=""><i class="fas fa-asterisk"></i>&nbsp;&nbsp;&nbsp;Flare</a></li>
+            <li class="" style="" ><a href="/connects" style=""><i class="fas fa-brain"></i>&nbsp;&nbsp;Connects</a></li>
+            <li class="" style="" ><a href="#" style=""><i class="fas fa-info-circle"></i>&nbsp;&nbsp;&nbsp;About</a></li>
+          </ol>
+    </div>
+    <div class="offset-lg-2 col-lg-10 main-chart" style="">
+          
+           <!-- Area Chart Example-->     
+
+                <ol class="breadcrumb" style="">
+            <li class="breadcrumb-item">
+              <a href="#">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Rider Analysis</li>
+          </ol>
+
+          <!-- Area Chart Example-->
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+              <div class="card mb-3">
+                 <div class="card-header">
+              <i class="fas fa-chart-area"></i>
+              Rider Analysis
+                 </div>
+                 <div class="chart">
+                <div id="sample-metadata" class="panel-body"></div>
+              </div>
+                      <div class="card-footer small text-muted" ><p>Data August 2018 *</p></div>
+              </div>
+          </div>
+
+            </div>
+          </div>
+        </div>  
+          <!-- Area Chart Example -->
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
