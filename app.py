@@ -37,6 +37,16 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
+@app.route("/dash")
+def dash():
+    """Return the homepage."""
+    return render_template("dash.html")
+
+@app.route("/about")
+def about():
+    """Return the homepage."""
+    return render_template("about.html")
+
 @app.route("/connects")
 def conn():
     """Return the connections page."""
