@@ -10,7 +10,7 @@ from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
-import simplejson as json
+
 
 app = Flask(__name__)
 
