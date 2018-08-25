@@ -1,122 +1,235 @@
-// Create a map object
-var myMap = L.map("map", {
-    center: [41.8781, -87.6298],
-    zoom: 13
-});
+var svgWidth = 960;
+var svgHeight = 500;
 
-// Add a tile layer
-L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-maxZoom: 18,
-id: "mapbox.streets-basic",
-accessToken: API_KEY
-}).addTo(myMap);
+var margin = {
+  top: 20,
+  right: 40,
+  bottom: 80,
+  left: 100
+};
+
+var width = svgWidth - margin.left - margin.right;
+var height = svgHeight - margin.top - margin.bottom;
+
+// Create an SVG wrapper, append an SVG group that will hold our chart,
+// and shift the latter by left and top margins.
+var svg = d3
+  .select(".chart")
+  .append("svg")
+  .attr("width", svgWidth)
+  .attr("height", svgHeight);
+
+// Append an SVG group
+var chartGroup = svg.append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Initial Params
+var chosenXAxis = "tripduration";
 
 
-var circleGroup = L.featureGroup().addTo(myMap).on("click", groupClick);
-var marker, test;
+// function buildMetadata(sample) {
+//   d3.json(`/rides/${sample}`).then((data) => {
+//     // Use d3 to select the panel with id of `#sample-metadata`
+//     var PANEL = d3.select("#sample-metadata");
+
+//     // Use `.html("") to clear any existing metadata
+//     PANEL.html("");
+
+//     // Use `Object.entries` to add each key and value pair to the panel
+//     // Hint: Inside the loop, you will need to use d3 to append new
+//     // tags for each key-value in the metadata.
+//     Object.entries(data).forEach(([key, value]) => {
+//       PANEL.append("h6").text(`${key}: ${value}`);
+//     });
+
+//     // BONUS: Build the Gauge Chart
+//     buildGauge(data.WFREQ);
+//   });
+// }
 
 
-d3.json('/stationvolume').then(function(data) {
-    // Once a response is received, send the data.features object to the createStations function
-    console.log(data);
 
-    createStations(data)
-});
 
-function createStations(stationsData) {
-    function chooseColor(d) {
-        if (d <= 100) {
-            return "#DCEDC8";
-        }
-        else if (d > 100 && d <= 500) {
-            return "#e894c1";
-        }
-        else if (d > 500 && d <= 1000) {
-            return "#F45DAD";
-        }
-        else if (d > 1000 && d <= 2000){
-            return "#DD308D";
-        }
-        else if (d > 2000 && d <= 3000){
-            return "#A54277";
-        }
-        else if (d > 3000) {
-            return "#871552";
+// function used for updating x-scale var upon click on axis label
+function xScale(ageData, chosenXAxis) {
+    // create scales
+    var xLinearScale = d3.scaleLinear()
+      .domain([d3.min(ageData, d => d[chosenXAxis]) * 0.8,
+        d3.max(ageData, d => d[chosenXAxis]) * 1.2
+      ])
+      .range([0, width]);
+  
+    return xLinearScale;
+}
+
+// function used for updating xAxis var upon click on axis label
+function renderAxes(newXScale, xAxis) {
+    var bottomAxis = d3.axisBottom(newXScale);
+  
+    xAxis.transition()
+      .duration(1000)
+      .call(bottomAxis);
+  
+    return xAxis;
+}
+
+// function used for updating circles group with a transition to
+// new circles
+function renderCircles(circlesGroup, newXScale, chosenXaxis) {
+
+    circlesGroup.transition()
+      .duration(1000)
+      .attr("cx", d => newXScale(d[chosenXAxis]));
+  
+    return circlesGroup;
+}
+
+// function used for updating circles group with new tooltip
+function updateToolTip(chosenXAxis, circlesGroup) {
+
+    if (chosenXAxis === "tripduration") {
+      var label = "Trip Duration:";
+    }
+    else {
+      var label = "Trip Count:";
+    }
+  
+    var toolTip = d3.tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function(d) {
+        return (`${d.birthyear}<br>${label} ${d[chosenXAxis]}`);
+      });
+  
+    circlesGroup.call(toolTip);
+  
+    circlesGroup.on("mouseover", function(data) {
+      toolTip.show(data);
+    })
+      // onmouseout event
+      .on("mouseout", function(data, index) {
+        toolTip.hide(data);
+      });
+  
+    return circlesGroup;
+}
+
+d3.json("/age").then((ageData) => {
+
+  // parse data
+  ageData.forEach(function(data) {
+    data.birthyear = +data.birthyear;
+    data.tripduration = +data.tripduration;
+    data.trip_count = +data.trip_count;
+  });
+
+  // xLinearScale function above csv import
+  var xLinearScale = xScale(ageData, chosenXAxis);
+
+  // Create y scale function
+  var yLinearScale = d3.scaleLinear()
+    .domain([1900, d3.max(ageData, d => d.birthyear)])
+    .range([height, 0]);
+
+  // Create initial axis functions
+  var bottomAxis = d3.axisBottom(xLinearScale);
+  var leftAxis = d3.axisLeft(yLinearScale);
+
+  // append x axis
+  var xAxis = chartGroup.append("g")
+    .classed("x-axis", true)
+    .attr("transform", `translate(0, ${height})`)
+    .call(bottomAxis);
+
+  // append y axis
+  chartGroup.append("g")
+    .call(leftAxis);
+
+  // append initial circles
+  var circlesGroup = chartGroup.selectAll("circle")
+    .data(ageData)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xLinearScale(d[chosenXAxis]))
+    .attr("cy", d => yLinearScale(d.birthyear))
+    .attr("r", 15)
+    .attr("fill", "blue")
+    .attr("opacity", ".3");
+
+  // Create group for  2 x- axis labels
+  var labelsGroup = chartGroup.append("g")
+    .attr("transform", `translate(${width / 2}, ${height + 20})`);
+
+  var tripDurationLabel = labelsGroup.append("text")
+    .attr("x", 0)
+    .attr("y", 20)
+    .attr("value", "tripduration") // value to grab for event listener
+    .classed("active", true)
+    .text("Trip Duration (sec)");
+
+  var countLabel = labelsGroup.append("text")
+    .attr("x", 0)
+    .attr("y", 40)
+    .attr("value", "trip_count") // value to grab for event listener
+    .classed("inactive", true)
+    .text("Trip Count");
+
+  // append y axis
+  chartGroup.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .classed("axis-text", true)
+    .text("Year Born");
+
+  // updateToolTip function above csv import
+  var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+
+  // x axis labels event listener
+  labelsGroup.selectAll("text")
+    .on("click", function() {
+      // get value of selection
+      var value = d3.select(this).attr("value");
+      if (value !== chosenXAxis) {
+
+        // replaces chosenXAxis with value
+        chosenXAxis = value;
+
+        // updates x scale for new data
+        xLinearScale = xScale(ageData, chosenXAxis);
+
+        // updates x axis with transition
+        xAxis = renderAxes(xLinearScale, xAxis);
+
+        // updates circles with new x values
+        circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis);
+
+        // updates tooltips with new info
+        circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+
+        // changes classes to change bold text
+        if (chosenXAxis === "birthyear") {
+          countLabel
+            .classed("active", true)
+            .classed("inactive", false);
+          tripDurationLabel
+            .classed("active", false)
+            .classed("inactive", true);
         }
         else {
-        return "green";
+          countLabel
+            .classed("active", false)
+            .classed("inactive", true);
+          tripDurationLabel
+            .classed("active", true)
+            .classed("inactive", false);
         }
-    }
-
-    for(var i = 0; i < stationsData.length; i++) {
-
-        var circle = L.circle([stationsData[i].from_latitude, stationsData[i].from_longitude], {
-            fillOpacity: 0.75,
-            color: "black",
-            weight: 1,
-            fillColor: chooseColor(stationsData[i].trip_count),
-            radius: 50
-            })
-            //.bindPopup("<h3>" + stationsData[i].name + "</h3><h4>" + stationsData[i].trip_count + " trips</h4>")
-            .addTo(circleGroup);
-            
-        test = stationsData[i].from_station_id;    
-        circle.test = test;
-    };
-
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend'),
-            trips = [0,100,500,1000,2000,3000],
-            labels = [];
-
-        // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < trips.length; i++) {
-            div.innerHTML +=
-                '<i style="background:' + chooseColor(trips[i] + 1) + '"></i> ' +
-                trips[i] + (trips[i + 1] ? '&ndash;' + trips[i + 1] + '<br>' : '+');
-        }
-
-        return div;
-    };
-
-    legend.addTo(myMap);
-
-};
-
-function groupClick(event) {
-    // console.log(event.layer.test)
-    lineGroup.clearLayers();
-    showTrips(event.layer.test)
-}
-
-
-var lineGroup = L.featureGroup().addTo(myMap);
-
-function showTrips(stationID) {
-    d3.json(`/trips/${stationID}`).then(function(data) {
-        // Once a response is received, send the data object to the createTrips function
-        console.log(data);
-
-        createTrips(data)
+      }
     });
-};
+});
 
-function createTrips(tripsData) {
-    // Write a loop to run once for each station-to-station connection in the array and add them to a group.
-    for(var i = 0; i < tripsData.length; i++) {
-        var line = [
-            [tripsData[i].from_latitude , tripsData[i].from_longitude],
-            [tripsData[i].to_latitude , tripsData[i].to_longitude]
-        ];
+d3.json("/rides").then((data) => {
+  console.log(data)
+});
 
-        L.polyline(line, {
-            color: "black",
-            weight: 1,
-            opacity: 0.5
-        }).addTo(lineGroup);
-    }
-}

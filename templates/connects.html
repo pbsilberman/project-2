@@ -6,15 +6,17 @@
 Divvy Data Analysis
 </title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-<link rel="stylesheet" href="../static/css/style.css">
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans+Condensed:400,400i|IBM+Plex+Sans:100,100i,400,400i,700,700i|IBM+Plex+Serif:400,400i" rel="stylesheet"> 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-  <!-- Leaflet CSS & JS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
+  <!-- Our CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/connectstyle.css') }}">
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
 
-  <!--D3 cdn-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top" style="">
@@ -28,13 +30,14 @@ Divvy Data Analysis
       
 <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          THE DATA
+          Visualizations
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="visualization-page1.html">Visualization 1</a>
-          <a class="dropdown-item" href="visualization-page2.html">Visualization 2</a>
-          <a class="dropdown-item" href="visualization-page3.html">Visualization 3</a>
-          <a class="dropdown-item" href="visualization-page4.html">Visualization 4</a>
+          <a class="dropdown-item" href="#">Dashboard</a>
+          <a class="dropdown-item" href="#">Station Map</a>
+          <a class="dropdown-item" href="/riders">Rider Analysis</a>
+          <a class="dropdown-item" href="/flare">Flare</a>
+          <a class="dropdown-item" href="/connects">Connections</a>
         </div>
       </li>
       <li class="nav-item">
@@ -54,10 +57,10 @@ Divvy Data Analysis
     <div class="col-2 d-none d-lg-block side-left-nav" style="">
       <ol class="nav-left-ol">
             <li class="top-li"style=""><a href="#" style=""><i class="fas fa-tachometer-alt"></i>&nbsp;&nbsp;Dashboard</a></li>
-            <li class="" style=""><a href="#" style=""><i class="fas fa-map-marked-alt"></i>&nbsp;&nbsp;Map</a></li>
-            <li class="" style=""><a href="#" style=""><i class="fas fa-chart-bar"></i>&nbsp;&nbsp;&nbsp;Data Charts</a></li>
-            <li class="" style=""><a href="#" style=""><i class="fas fa-asterisk"></i>&nbsp;&nbsp;&nbsp;Flare</a></li>
-            <li class="" style="" ><a href="#" style=""><i class="fas fa-brain"></i>&nbsp;&nbsp;Connects</a></li>
+            <li class="" style=""><a href="/" style=""><i class="fas fa-map-marked-alt"></i>&nbsp;&nbsp;Map</a></li>
+            <li class="" style=""><a href="/riders" style=""><i class="fas fa-chart-bar"></i>&nbsp;&nbsp;&nbsp;Rider Analysis</a></li>
+            <li class="" style=""><a href="/flare" style=""><i class="fas fa-asterisk"></i>&nbsp;&nbsp;&nbsp;Flare</a></li>
+            <li class="" style="" ><a href="/connects" style=""><i class="fas fa-brain"></i>&nbsp;&nbsp;Connects</a></li>
             <li class="" style="" ><a href="#" style=""><i class="fas fa-info-circle"></i>&nbsp;&nbsp;&nbsp;About</a></li>
           </ol>
     </div>
@@ -78,7 +81,7 @@ Divvy Data Analysis
               <div class="card mb-3">
                  <div class="card-header">
               <i class="fas fa-chart-area"></i>
-              Divvy Station Map
+              Divvy Connections Map
                  </div>
                 <div class="card-body" id="map">
               <!--<canvas id="map" width="100%" height="30"></canvas>-->
@@ -86,53 +89,15 @@ Divvy Data Analysis
                       <div class="card-footer small text-muted" ><p>All the stations as of August 2018 *</p></div>
               </div>
           </div>
-          <div class="col-lg-4 col-md-4" style="height:100%;">
-              <div class="card mb-3" style="height:100%;">
-                 <div class="card-header">
-              <i class="fas fa-chart-area"></i>
-              About Divvy 
-                 </div>
-                <div class="card-body" id="" >
-                  
-                  <div><strong>Owner: </strong>Chicago</div>
-<div><strong>Daily ridership: </strong><span>13,000 (Sep 2014)</span></div>
-<div><strong>Annual ridership:</strong> <span>3,200,000 (Feb 2016)</span></div>
-<div><strong>Number of stations: </strong><span>580</span></div>
-<div><strong>Began operation: </strong><span>June 28, 2013</span></div>
-<div><strong>Founded: </strong><span>2011</span></div>
-<div><strong>Number of vehicles: </strong><span>5,800</span></div>
-              <!--<canvas id="map" width="100%" height="30"></canvas>-->
-                </div>
-                      <div class="card-footer small text-muted" ><p>Data from the DIVVY Wiki *</p></div>
-              </div>
-              <div class="card mb-3" style="height:100%;">
-                 <div class="card-header">
-              <i class="fas fa-chart-area"></i>
-              Divvy Data
-                 </div>
-              <div class="card-body" id="" >
-                  
-                  <div><strong>Links to data used for this map </strong></div>
-<div><a href="https://feeds.divvybikes.com/stations/stations.json">https://feeds.divvybikes.com/stations/stations.json</a></div>
-<div><a href="https://s3.amazonaws.com/divvy-data/tripdata/Divvy_Trips_2017_Q3Q4.zip">https://s3.amazonaws.com/divvy-data/tripdata/Divvy_Trips_2017_Q3Q4.zip</a></div>
-<div><a href="https://www.divvybikes.com/system-data">https://www.divvybikes.com/system-data</a></div>
 
-              <!--<canvas id="map" width="100%" height="30"></canvas>-->
-                </div>
-                      <div class="card-footer small text-muted" ><p>Divvy Data converted to Geojson *</p></div>
-              </div>
-          </div>
             </div>
           </div>
         </div>  
           <!-- Area Chart Example -->
     </div>
-  </div>
 
-</div>
-
-<script src="../static/js/stations.js"></script>  
-<script type="text/javascript" src="../static/js/config.js"></script>   
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/connects.js') }}"></script>
   <!-- Our JS -->
 <script type="text/javascript" src="../static/js/geojsonmap.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

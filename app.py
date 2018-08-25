@@ -37,6 +37,20 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
+@app.route("/connects")
+def conn():
+    """Return the connections page."""
+    return render_template("connects.html")    
+
+@app.route("/flare")
+def flare():
+    """Return the flare page."""
+    return render_template("flare.html")
+
+@app.route("/riders")
+def riders():
+    """Return the riders analysis page."""
+    return render_template("riders.html")       
 
 @app.route("/stationvolume")
 def stationvollist():
