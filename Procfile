@@ -1,1 +1,1 @@
-web: gunicorn bellybutton.app:app
+web: gunicorn divvystats.app:app
